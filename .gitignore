@@ -39,5 +39,5 @@ jspm_packages
 # IntelliJ IDEA
 /.idea/
 
-# Webpack distributions
-/dist/
+# Exclude builds
+/build/

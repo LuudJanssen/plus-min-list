@@ -1,5 +1,7 @@
-let bunyan = require('bunyan');
+import bunyan from 'bunyan';
 
-module.exports = bunyan.createLogger({
+let logger = bunyan.createLogger({
   name: 'plus-min-list'
 });
+
+export default logger;

@@ -1,8 +1,18 @@
-import logger from './logger';
-import PlusMinServer from './PlusMinServer';
+function startServer(server) {
+  server.buildClient();
+  server.setWatchers();
+  server.start();
+  server.registerRestart(newServer);
+}
 
-logger.info('Started Server');
+function newServer() {
+  delete require.cache[require.resolve('./PlusMinServer')];
+  let PlusMinServer = require('./PlusMinServer');
 
-const server = new PlusMinServer();
+  /* We need default because we're doing some hacky thing with Babel and
+   * deleting the require cache. */
+  let serverInstance = new PlusMinServer.default();
+  startServer(serverInstance);
+}
 
-server.start();
+newServer();
