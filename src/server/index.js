@@ -1,18 +1,47 @@
+import gulp from 'gulp';
+import tap from 'gulp-tap';
+
+/**
+ * Start an instance of the PlusMinServer. This includes building the client, setting the watchers and registering the APIs.
+ *
+ * @param {PlusMinServer} server The PlusMinServer instance to start.
+ */
 function startServer(server) {
   server.buildClient();
-  server.setWatchers();
   server.start();
-  server.registerRestart(newServer);
 }
 
+/**
+ * Start a new server.
+ */
 function newServer() {
-  delete require.cache[require.resolve('./PlusMinServer')];
+  if (fileWatcher) {
+    fileWatcher.stopWatching();
+  }
+
+  /**
+   * Don't try this at home kids. We use gulp to get all watched files and invalidate their require cache.
+   */
+  gulp.src(['src/server/**/*.*', '!src/server/index.js'])
+    .pipe(tap(function (file) {
+      delete require.cache[
+        require.resolve(
+          file.path.replace(__dirname, '.')
+        )];
+    }));
+
   let PlusMinServer = require('./PlusMinServer');
+  let FileWatcher = require('./FileWatcher');
 
   /* We need default because we're doing some hacky thing with Babel and
    * deleting the require cache. */
   let serverInstance = new PlusMinServer.default();
+
+  fileWatcher = new FileWatcher.default(serverInstance);
+  fileWatcher.registerReload(newServer);
+
   startServer(serverInstance);
 }
 
+let fileWatcher;
 newServer();
