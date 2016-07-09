@@ -8,14 +8,19 @@ export default class PlusMinServer {
     this._watchers = [];
 
     this._setupRouters();
-    this._setupStatic();
+    this.setupStatic();
   }
+
+  get express () {
+    return this._express;
+  };
 
   start() {
     try {
       this._runningServer = this.express.listen(3000, this._serverController)
+      logger.info('Server: ', 'Server successfully started');
     } catch (e) {
-      logger.warn('Starting server failed. Error:', e);
+      logger.warn('Server: ', 'Starting server failed with error:', e);
     }
   }
 
@@ -27,6 +32,7 @@ export default class PlusMinServer {
   buildClient() {
     this._clientBuilder = new ClientBuilder;
     this._clientBuilder.build();
+    this.setupStatic();
   }
 
   rebuildClient() {
@@ -34,15 +40,11 @@ export default class PlusMinServer {
     this.buildClient();
   }
 
-  get express () {
-    return this._express;
-  };
-
-  _setupRouters() {
+  setupStatic() {
+    this.express.use(express.static('build'));
   }
 
-  _setupStatic() {
-    this.express.use(express.static('build'));
+  _setupRouters() {
   }
 
   static _serverController() {

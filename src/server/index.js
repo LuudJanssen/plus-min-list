@@ -19,10 +19,14 @@ function newServer() {
     fileWatcher.stopWatching();
   }
 
+  if (watch) {
+    watch.end();
+  }
+
   /**
    * Don't try this at home kids. We use gulp to get all watched files and invalidate their require cache.
    */
-  gulp.src(['src/server/**/*.*', '!src/server/index.js'])
+  watch = gulp.src(['src/server/**/*.*', '!src/server/index.js'])
     .pipe(tap(function (file) {
       delete require.cache[
         require.resolve(
@@ -30,18 +34,23 @@ function newServer() {
         )];
     }));
 
-  let PlusMinServer = require('./PlusMinServer');
-  let FileWatcher = require('./FileWatcher');
+  /**
+   * We need default because we're doing some hacky thing with Babel and
+   * deleting the require cache.
+   */
+  let PlusMinServer = require('./PlusMinServer').default;
+  let FileWatcher = require('./FileWatcher').default;
+  let logger = require('./logger').default;
 
-  /* We need default because we're doing some hacky thing with Babel and
-   * deleting the require cache. */
-  let serverInstance = new PlusMinServer.default();
+  logger.info('Server: ', 'Setting up new server');
 
-  fileWatcher = new FileWatcher.default(serverInstance);
+  let serverInstance = new PlusMinServer();
+  fileWatcher = new FileWatcher(serverInstance);
   fileWatcher.registerReload(newServer);
 
   startServer(serverInstance);
 }
 
 let fileWatcher;
+let watch;
 newServer();
