@@ -1,6 +1,8 @@
 import express from 'express';
-import logger from './logger';
+import Logger from './logger';
 import ClientBuilder from './build/client';
+
+let logger = new Logger('Server');
 
 export default class PlusMinServer {
   constructor() {
@@ -18,9 +20,9 @@ export default class PlusMinServer {
   start() {
     try {
       this._runningServer = this.express.listen(3000, this._serverController)
-      logger.info('Server: ', 'Server successfully started');
+      logger.info('Server successfully started');
     } catch (e) {
-      logger.warn('Server: ', 'Starting server failed with error:', e);
+      logger.warn('Starting server failed with error:', e);
     }
   }
 

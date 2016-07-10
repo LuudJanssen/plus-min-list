@@ -1,3 +1,7 @@
 {
-  "appName": "plus-min-app"
+  "appName": "plus-min-app",
+  "database": {
+    "host": "localhost",
+    "port": 28016
+  }
 }

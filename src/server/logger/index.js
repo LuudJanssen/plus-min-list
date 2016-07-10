@@ -1,7 +1,19 @@
-import bunyan from 'bunyan';
+import bunyan from './bunyanInstance';
 
-let logger = bunyan.createLogger({
-  name: 'plus-min-list'
-});
+export default class Logger {
+  constructor (appName) {
+    this.appName = appName;
+  }
 
-export default logger;
+  info (message = '') {
+    bunyan.info(this.appName + ': ', message);
+  }
+
+  warn (message = '') {
+    bunyan.warn(this.appName + ': ', message);
+  }
+
+  error (message = '') {
+    bunyan.error(this.appName + ': ', message);
+  }
+}

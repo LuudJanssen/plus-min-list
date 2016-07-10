@@ -40,9 +40,11 @@ function newServer() {
    */
   let PlusMinServer = require('./PlusMinServer').default;
   let FileWatcher = require('./FileWatcher').default;
-  let logger = require('./logger').default;
+  let Logger = require('./logger').default;
 
-  logger.info('Server: ', 'Setting up new server');
+  let logger = new Logger('Server');
+
+  logger.info('Setting up new server');
 
   let serverInstance = new PlusMinServer();
   fileWatcher = new FileWatcher(serverInstance);
