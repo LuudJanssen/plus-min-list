@@ -4,13 +4,11 @@ import schema from './schema.js';
 
 class ServerConfig {
   constructor() {
-    this._jsonConfig = jsonServerConfig;
-
     /**
      * Validate the JSON config
      */
     try {
-      Joi.validate(this._jsonConfig, schema);
+      this._jsonConfig = Joi.validate(jsonServerConfig, schema).value;
     } catch (e) {
       console.error('The config in \'config/server.json\' is not a valid config configuration. Error: ', e);
     }
