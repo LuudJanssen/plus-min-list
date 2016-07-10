@@ -1,6 +1,9 @@
 import gulp from 'gulp';
 import less from 'gulp-less';
 import autoprefixer from 'gulp-autoprefixer';
+import browserify from 'browserify';
+import mkdirp from 'mkdirp';
+import fs from 'fs';
 import path from 'path';
 import Logger from '../logger';
 
@@ -13,6 +16,7 @@ export default class ClientBuilder {
     logger.info('Building started');
     this._moveIndex();
     this._buildStyle();
+    this._buildScripts();
     logger.info('Client build complete')
   }
 
@@ -35,5 +39,26 @@ export default class ClientBuilder {
       .pipe(gulp.dest('build/css'));
 
     logger.info('Imported less files, prefixed them and moved to build');
+  }
+
+  _buildScripts() {
+    let bundleDestination = 'build/js/bundle.js';
+
+    mkdirp(path.dirname(bundleDestination), function () {
+      let bundleDestinationStream = fs.createWriteStream('build/js/bundle.js');
+
+      bundleDestinationStream.on('open', function () {
+        browserify('src/client/js/index.js')
+          .transform('babelify', {
+            presets: ['es2015']
+          })
+          .bundle()
+          .pipe(bundleDestinationStream);
+      });
+
+      bundleDestinationStream.on('finish', function () {
+        logger.info('Transpiled and bundled client javascript');
+      });
+    });
   }
 }

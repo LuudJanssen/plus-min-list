@@ -17,7 +17,10 @@
     "url": "https://github.com/LuudJanssen/plus-min-list/issues"
   },
   "dependencies": {
+    "babel-plugin-transform-es2015-modules-amd": "^6.8.0",
     "babel-register": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
     "bunyan": "^1.8.1",
     "express": "^4.14.0",
     "gulp-autoprefixer": "^3.1.0",
@@ -26,7 +29,8 @@
     "joi": "^9.0.0",
     "lodash": "^4.13.1",
     "material-colors": "~1.0.0",
-    "npm": "^3.10.5",
+    "mkdirp": "^0.5.1",
+    "object-resolve-path": "^1.1.1",
     "rebounce": "^2.0.0",
     "rethinkdb": "^2.3.2"
   },

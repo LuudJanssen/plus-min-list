@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import jsonServerConfig from 'config/server.json';
 import schema from './schema.js';
+import resolvePath from 'object-resolve-path';
 
 class ServerConfig {
   constructor() {
@@ -14,8 +15,8 @@ class ServerConfig {
     }
   }
 
-  get (value) {
-    return this._jsonConfig[value];
+  get(value) {
+    return resolvePath(this._jsonConfig, value);
   }
 }
 

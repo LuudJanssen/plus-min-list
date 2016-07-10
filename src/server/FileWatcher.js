@@ -34,7 +34,12 @@ export default class FileWatcher {
     let self = this;
     return gulp.watch(['src/client/**/*.*'], function (event) {
       logger.info('Client file on path \'' + event.path + '\' was ' + event.type);
-      self.server.rebuildClient();
+      if (event.type === 'added') {
+        self.server.stop();
+        self._reloadFunction();
+      } else {
+        self.server.rebuildClient();
+      }
     });
   }
 

@@ -5,15 +5,15 @@ export default class Logger {
     this.appName = appName;
   }
 
-  info (message = '') {
-    bunyan.info(this.appName + ': ', message);
+  info (...messages) {
+    bunyan.info(this.appName + ': ', ...messages);
   }
 
-  warn (message = '') {
-    bunyan.warn(this.appName + ': ', message);
+  warn (...messages) {
+    bunyan.warn(this.appName + ': ', ...messages);
   }
 
-  error (message = '') {
-    bunyan.error(this.appName + ': ', message);
+  error (...messages) {
+    bunyan.error(this.appName + ': ', ...messages);
   }
 }
