@@ -9,12 +9,15 @@
   <link rel="stylesheet" href="css/application.css">
   <link rel="stylesheet" href="css/spinner.css">
   <link rel="stylesheet" href="css/helpers.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700|Roboto:100,300,400,400i,500,700,900" rel="stylesheet">
 </head>
 <body>
 
 <main class="application" ng-app="plusMinList" ng-controller="plusMinController">
   {{ state }}
   <list-editor list="list" ng-if="state === 'editList'"></list-editor>
+  <list-selector lists="lists" ng-if="state === 'selectList'"></list-selector>
   <div class="spinner-container center-hor center-ver" ng-class="{ 'invisible': state !== 'loading' }">
     <div class="spinner">
       <div class="spinner-cube-1 spinner-cube"></div>
