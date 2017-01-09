@@ -4,8 +4,8 @@ export default class ListEditor extends AngularClass {
   constructor() {
     super(...arguments);
 
-    this.test().then(function (message) {
-      console.log(message);
-    });
+    console.log('scope', this.$scope);
+    console.log('list', this.$scope.list);
   }
+
 }

@@ -13,10 +13,13 @@ app.controller('plusMinController', function ($element, $scope, $http, PlusMinCl
 
       if (lists.length === 0) {
         $scope.list = {
-          new: true
-        }
+          new: true,
+          positives: [''],
+          negatives: ['']
+        };
       } else {
         $scope.list = list[0];
+        $scope.list.new = false;
       }
     } else {
       $scope.state = 'selectList';
