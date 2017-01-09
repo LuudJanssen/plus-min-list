@@ -33,16 +33,8 @@ app.controller('plusMinController', function ($element, $scope, $http, PlusMinCl
       if (lists.length === 0) {
         $scope.list = {
           new: true,
-          positives: [{
-            title: 'Positief dingetje 1'
-          }, {
-            title: 'Positief dingetje 2'
-          }, {
-            title: 'Positief dingetje 3'
-          }],
-          negatives: [{
-            title: 'Negatief dingetje 1'
-          }]
+          positives: [],
+          negatives: []
         };
       } else {
         $scope.list = lists[0];
