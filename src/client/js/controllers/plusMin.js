@@ -8,7 +8,7 @@ app.controller('plusMinController', function ($element, $scope, $http, PlusMinCl
   client.loadLists().then(function (request) {
     let lists = request.data;
 
-    if (lists.length < 2) {
+    if (lists.length < 2 && false) {
       $scope.state = 'editList';
 
       if (lists.length === 0) {
@@ -23,7 +23,12 @@ app.controller('plusMinController', function ($element, $scope, $http, PlusMinCl
       }
     } else {
       $scope.state = 'selectList';
-      $scope.lists = lists;
+      //$scope.lists = lists;
+      $scope.lists = [{
+        name: 'List 1'
+      }, {
+        name: 'List 2'
+      }];
     }
   });
 });
