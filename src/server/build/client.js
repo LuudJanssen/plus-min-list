@@ -29,7 +29,7 @@ export default class ClientBuilder {
   }
 
   _buildStyle() {
-    gulp.src(['src/client/less/public/*.less'])
+    gulp.src(['src/client/less/public/**/*.less'])
       .pipe(less({
         paths: [
           ROOT,
