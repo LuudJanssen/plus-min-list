@@ -146,8 +146,13 @@ export default class PlusMinDatabase {
     return this._checkConnection() ||
       new Promise(function (resolve, reject) {
         rethink.dbCreate(name).run(self._connection, function (error, result) {
-          error ? reject(error) : resolve(result);
-          logger.info('Created database', name);
+          if (error) {
+            reject(error);
+            logger.error('Failed to create database', name);
+          } else {
+            resolve(result);
+            logger.info('Created database', name);
+          }
         })
       })
   }
