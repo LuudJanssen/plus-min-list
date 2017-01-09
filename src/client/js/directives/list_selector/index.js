@@ -6,10 +6,7 @@ import selectorTemplate from './index.html';
 app.directive('listSelector', function () {
   return {
     restrict: 'E',
-    scope: {
-      lists: '='
-    },
     template: selectorTemplate,
-    controller: useAngularClass(['$scope'], ListSelector)
+    controller: useAngularClass(['$scope', 'PlusMinClient'], ListSelector)
   }
 });

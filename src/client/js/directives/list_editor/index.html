@@ -1,21 +1,32 @@
 <div class="list-editor">
-  <h1 ng-if="list.new">Hello, you don't seem to have any lists yet, so I created one for you. What do you want to call it?</h1>
+  <div class="list-update-status">{{ updateStatus }}</div>
+  <h1 ng-if="list.new">Hello, you don't seem to have any lists yet, so I created one for you. <br>What do you want to call it?</h1>
   <h1 ng-if="!list.new">Hello, you are now editing your list called:</h1>
   <form>
-    <input class="input-inline" ng-if="list.new">
-    <input class="input-inline" ng-if="!list.new" value="{{ list.name }}">
+    <div class="input-large">
+      <input id="list-name" placeholder="List Name" autofocus="{{ list.new }}" ng-model="list.name" ng-change="saveList()">
+      <label for="list-name"></label>
+    </div>
   </form>
   <div class="list-container">
-    <div class="list-negatives">
+    <div class="list-negatives list-column">
       <h2>Negatives</h2>
-      <div class="list-column">
-        <div class="list-item" ng-repeat="item in list.negatives">{{ item }}</div>
+      <div class="list">
+        <div class="list-item" ng-repeat="item in list.negatives">
+          <textarea class="list-item-input" msd-elastic="" ng-model="item.title" ng-change="saveList()" rows="1"></textarea>
+          <hr class="list-item-divider">
+          <div class="list-item-delete" ng-click="deleteItem(list.negatives, $index)" ng-if="!$last">×</div>
+        </div>
       </div>
     </div>
-    <div class="list-positives">
+    <div class="list-positives list-column">
       <h2>Positives</h2>
-      <div class="list-column">
-        <div class="list-item" ng-repeat="item in list.positives">{{ item }}</div>
+      <div class="list">
+        <div class="list-item" ng-repeat="item in list.positives">
+          <textarea class="list-item-input" msd-elastic="" ng-model="item.title" ng-change="saveList()" rows="1"></textarea>
+          <hr class="list-item-divider">
+          <div class="list-item-delete" ng-click="deleteItem(list.positives, $index)" ng-if="!$last">×</div>
+        </div>
       </div>
     </div>
   </div>

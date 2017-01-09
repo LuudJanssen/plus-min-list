@@ -1,4 +1,5 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import Logger from './logger';
 import ClientBuilder from './build/client';
 import serverConfig from './config';
@@ -13,6 +14,7 @@ export default class PlusMinServer {
     this._express = express();
     this._runningTimeouts = [];
 
+    this.loadExpressModules();
     this._setupRouter();
     this.setupStatic();
   }
@@ -51,6 +53,10 @@ export default class PlusMinServer {
 
   setupStatic() {
     this.express.use(express.static('build'));
+  }
+
+  loadExpressModules() {
+    this.express.use(bodyParser.json());
   }
 
   _setupRouter() {

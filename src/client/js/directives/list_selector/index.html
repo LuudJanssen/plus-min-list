@@ -1,6 +1,8 @@
-<h1>Hello, which list do you want to edit?</h1>
-<div class="list-selector-container">
-  <div class="list-selector-list" ng-repeat="list in lists">
-    {{ list.name }}
+<div class="list-selector">
+  <h1>Hello, which list do you want to edit?</h1>
+  <div class="list-selector-item-container" ng-repeat="list in lists">
+    <div class="list-selector-item" ng-click="openList(list)">{{ list.name }}</div>
+    <div class="list-selector-delete" ng-click="deleteList(list)">×</div>
+    <div class="list-selector-item list-selector-new" ng-click="openNewList()" ng-if="$last">Create New List</div>
   </div>
 </div>

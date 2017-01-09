@@ -70,6 +70,68 @@ export default class PlusMinDatabase {
       });
   }
 
+  addList(list) {
+    let self = this;
+
+    if (!list.negatives) {
+      list.negatives = [];
+    }
+
+    if (!list.positives) {
+      list.positives = [];
+    }
+
+    if (!list.name) {
+      list.name = 'New List';
+    }
+
+    return this._checkConnection() ||
+      new Promise(function (resolve, reject) {
+        self.query()
+          .table('lists')
+          .insert(list)
+          .run(self._connection, function (error, updateSchema) {
+            if (error) throw error;
+
+            resolve(updateSchema);
+          });
+      });
+  }
+
+  updateList(listID, list) {
+    let self = this;
+
+    return this._checkConnection() ||
+      new Promise(function (resolve, reject) {
+        self.query()
+          .table('lists')
+          .filter(rethink.row('id').eq(listID))
+          .update(list)
+          .run(self._connection, function (error, updateSchema) {
+            if (error) throw error;
+
+            resolve(updateSchema);
+          });
+      });
+  }
+
+  deleteList(listID) {
+    let self = this;
+
+    return this._checkConnection() ||
+      new Promise(function (resolve, reject) {
+        self.query()
+          .table('lists')
+          .filter(rethink.row('id').eq(listID))
+          .delete()
+          .run(self._connection, function (error, updateSchema) {
+            if (error) throw error;
+
+            resolve(updateSchema);
+          });
+      });
+  }
+
   _createTableIfNotExists(tableName = '') {
     var self = this;
 

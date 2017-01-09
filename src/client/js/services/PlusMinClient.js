@@ -15,6 +15,29 @@ class PlusMinClient extends AngularClass {
       url: 'api/lists'
     });
   }
+
+  saveList(list) {
+    return this.$http({
+      method: 'POST',
+      url: 'api/lists/',
+      data: list
+    });
+  }
+
+  updateList(id, list) {
+    return this.$http({
+      method: 'POST',
+      url: 'api/lists/' + id,
+      data: list
+    });
+  }
+
+  deleteList(id) {
+    return this.$http({
+      method: 'DELETE',
+      url: 'api/lists/' + id
+    });
+  }
 }
 
 app.service('PlusMinClient', useAngularClass(['$http', '$q'], PlusMinClient));

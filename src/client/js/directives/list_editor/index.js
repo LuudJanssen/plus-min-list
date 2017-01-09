@@ -10,6 +10,6 @@ app.directive('listEditor', function () {
       list: '='
     },
     template: editorTemplate,
-    controller: useAngularClass(['$scope'], ListEditor)
+    controller: useAngularClass(['$scope', 'PlusMinClient', 'debounce'], ListEditor)
   }
 });

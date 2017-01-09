@@ -1,7 +1,53 @@
+@import (reference) '/src/client/less/colors';
+
 h1, h2 {
   font-family: 'Roboto Slab', serif;
 }
 
 h1, h2, h3, h4, h5, h6, p, div {
   color: rgba(0,0,0,0.87);
+}
+
+.input-large {
+  display: inline-block;
+  position: relative;
+
+  input {
+    position: relative;
+    background-color: transparent;
+    border: 0;
+    font-weight: 300;
+    border-bottom: 3px solid rgba(0,0,0,.12);
+    font-size: 2em;
+    padding: 12px 0;
+    color: rgba(0,0,0,.87);
+
+    &::placeholder {
+      color: rgba(0,0,0,.38);
+    }
+
+    &:focus + label,
+    &:active +label {
+      width: 100%;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background-color: @color-accent-red;
+    transition: width 0.2s ease-out;
+  }
+}
+
+input, textarea {
+  font-family: 'Roboto', sans-serif;
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
 }

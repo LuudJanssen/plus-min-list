@@ -10,7 +10,7 @@ export default function listsHandler(request, result) {
       setTimeout(function () {
         result.send(lists);
         logger.sendSuccessful(lists);
-      }, 500);
+      }, 0);
     })
     .catch(function (error) {
       result.send(error);

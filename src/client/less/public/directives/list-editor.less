@@ -1,3 +1,145 @@
+@import (reference) '/src/client/less/colors';
+
 .list-editor {
-  width: 50%;
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 48px;
+
+  .list-update-status {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+  }
+
+  .list-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+
+    .list-column {
+      flex: 0 0 auto;
+      width: 50%;
+      padding: 24px 48px;
+
+      h2 {
+        text-transform: uppercase;
+        font-weight: normal;
+      }
+
+      .list {
+        .list-item {
+          position: relative;
+
+          .list-item-input {
+            width: 100%;
+            resize: none;
+            background: transparent;
+            border: none;
+            font-weight: 300;
+            padding: 18px 0 6px;
+            font-size: 1.5em;
+          }
+
+          .list-item-divider {
+            position: relative;
+            width: 50%;
+            border: 1px solid rgba(0,0,0,0.12);
+            transition: all 0.2s;
+
+            &:after{
+              transition: inherit;
+              position: absolute;
+              font-size: 24px;
+              font-weight: 400;
+              line-height: 0;
+              color: rgba(0,0,0,0.12);
+            }
+          }
+
+          .list-item-delete {
+            position: absolute;
+            top: 18px;
+            width: 24px;
+            line-height: 24px;
+            text-align: center;
+            font-size: 1.5em;
+            color: rgba(0,0,0,0.54);
+          }
+        }
+      }
+    }
+
+    .list-negatives {
+      text-align: right;
+
+      h2 {
+        color: @color-negative-text;
+      }
+
+      .list {
+        .list-item {
+          .list-item-input {
+            text-align: right;
+          }
+
+          .list-item-input:active + .list-item-divider,
+          .list-item-input:focus + .list-item-divider {
+            border-color: @color-negative-text;
+
+            &:after {
+              color: @color-negative-text;
+            }
+          }
+
+          .list-item-divider {
+            margin-right: 0;
+
+            &:after{
+              content: '−';
+              left: -18px;
+            }
+          }
+
+          .list-item-delete {
+            right: -30px;
+          }
+        }
+      }
+    }
+
+    .list-positives {
+      text-align: left;
+
+      h2 {
+        color: @color-positive-text;
+      }
+      .list {
+        .list-item {
+          .list-item-input:active + .list-item-divider,
+          .list-item-input:focus + .list-item-divider {
+            border-color: @color-positive-text;
+
+            &:after {
+              color: @color-positive-text;
+            }
+          }
+
+          .list-item-divider {
+            margin-left: 0;
+
+            &:after {
+              content: '+';
+              right: -18px;
+            }
+          }
+
+          .list-item-delete {
+            left: -30px;
+          }
+        }
+      }
+    }
+  }
 }
