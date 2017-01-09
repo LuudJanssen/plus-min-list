@@ -3,6 +3,7 @@ import Logger from './logger';
 import ClientBuilder from './build/client';
 import serverConfig from './config';
 import database from './database';
+import setupRouter from './api/setupRouter';
 
 let logger = new Logger('Server');
 let reconnectionTime = serverConfig.get('database.reconnectionTime');
@@ -12,7 +13,7 @@ export default class PlusMinServer {
     this._express = express();
     this._runningTimeouts = [];
 
-    this._setupRouters();
+    this._setupRouter();
     this.setupStatic();
   }
 
@@ -52,7 +53,8 @@ export default class PlusMinServer {
     this.express.use(express.static('build'));
   }
 
-  _setupRouters() {
+  _setupRouter() {
+    setupRouter(this._express);
   }
 
   _connectToDatabase() {

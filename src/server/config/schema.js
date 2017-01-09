@@ -8,7 +8,8 @@ const schema = Joi.object().keys({
   'database': Joi.object({
     'host': Joi.string().default('localhost'),
     'port': Joi.number().default(28015),
-    'reconnectionTime': Joi.number().default(1000)
+    'reconnectionTime': Joi.number().default(1000),
+    'name': Joi.string().default('plusMin')
   }),
   'port': Joi.number().default(3000)
 });

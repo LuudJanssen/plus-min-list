@@ -1,5 +1,16 @@
 @import (reference) '/src/client/less/colors';
 
+.spinner-container {
+  position: relative;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.2s;
+
+  &.invisible {
+    opacity: 0;
+  }
+}
+
 .spinner {
   margin: 20px auto;
   width: 60px;

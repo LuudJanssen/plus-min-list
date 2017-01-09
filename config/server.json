@@ -2,8 +2,9 @@
   "appName": "plus-min-app",
   "database": {
     "host": "localhost",
-    "port": 28016,
-    "reconnectionTime": 1000
+    "port": 28015,
+    "reconnectionTime": 1000,
+    "name": "plusMin"
   },
   "port": 3000
 }

@@ -2,6 +2,7 @@ import gulp from 'gulp';
 import less from 'gulp-less';
 import autoprefixer from 'gulp-autoprefixer';
 import browserify from 'browserify';
+import stringify from 'stringify';
 import mkdirp from 'mkdirp';
 import fs from 'fs';
 import path from 'path';
@@ -51,6 +52,10 @@ export default class ClientBuilder {
         browserify('src/client/js/index.js')
           .transform('babelify', {
             presets: ['es2015']
+          })
+          .transform(stringify , {
+            appliesTo: { includeExtensions: ['.html'] },
+            minify: true
           })
           .bundle()
           .pipe(bundleDestinationStream);

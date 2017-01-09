@@ -12,8 +12,10 @@
 </head>
 <body>
 
-<main class="application">
-  <div class="center-hor center-ver">
+<main class="application" ng-app="plusMinList" ng-controller="plusMinController">
+  {{ state }}
+  <list-editor ng-if="state === 'editList'"></list-editor>
+  <div class="spinner-container center-hor center-ver" ng-class="{ 'invisible': state !== 'loading' }">
     <div class="spinner">
       <div class="spinner-cube-1 spinner-cube"></div>
       <div class="spinner-cube-2 spinner-cube"></div>
